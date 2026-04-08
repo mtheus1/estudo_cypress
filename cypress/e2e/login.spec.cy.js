@@ -9,16 +9,29 @@ describe('Orange HRM Tests', () => {
     loginButton: "[type='submit']",
     sectionTitleTopBar: '.oxd-topbar',
     wrongCredentialAlert: "[role='alert']",
-    dashBoard: ".orangehrm-dashboard-grid"
+    dashBoard: ".orangehrm-dashboard-grid",
+    myInfoButton: "[href='/web/index.php/pim/viewMyDetails']",
+    myInfoNickName: "[name='firstName']",
+    //myInfoMiddleName: "[name='middleName']",
+    //myInfoLastName: "[name='lastName']",
+    genericField: ".oxd-input--active"
   }
  
-  it('Login Success', () => {
-    cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+  it.only('Login Success', () => {
+    cy.visit('/auth/login')
     cy.get(selectorList.usernameField).type(userData.userSuccess.username)
     cy.get(selectorList.passwordField).type(userData.userSuccess.password)
     cy.get(selectorList.loginButton).click()
     cy.location('pathname').should('equal', '/web/index.php/dashboard/index')
     cy.get(selectorList.dashBoard)
+    cy.get(selectorList.myInfoButton).click()
+    cy.get(selectorList.myInfoNickName).clear().type('NickNameTest')
+    cy.get(selectorList.genericField).eq(1).clear().type('MiddleNameTest')
+    cy.get(selectorList.genericField).eq(2).clear().type('LastNameTest')
+    cy.get(selectorList.genericField).eq(3).clear().type('EmplyoeeId')
+    cy.get(selectorList.genericField).eq(4).clear().type('OtherId333')
+    cy.get(selectorList.genericField).eq(5).clear().type('DLTest')
+
   })
   it('Login Fail', () => {
     cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')

@@ -14,7 +14,11 @@ describe('Orange HRM Tests', () => {
     myInfoNickName: "[name='firstName']",
     //myInfoMiddleName: "[name='middleName']",
     //myInfoLastName: "[name='lastName']",
-    genericField: ".oxd-input--active"
+    genericField: ".oxd-input--active",
+    licenseExpire: "[placeholder='yyyy-dd-mm']",
+    closeButton: ".--close",
+    submitButton: "[type='submit']",
+    saveSuccess: ".oxd-toast-close"
   }
  
   it.only('Login Success', () => {
@@ -31,6 +35,11 @@ describe('Orange HRM Tests', () => {
     cy.get(selectorList.genericField).eq(3).clear().type('EmplyoeeId')
     cy.get(selectorList.genericField).eq(4).clear().type('OtherId333')
     cy.get(selectorList.genericField).eq(5).clear().type('DLTest')
+    cy.get(selectorList.licenseExpire).eq(0).clear().type("2001-05-04")
+    cy.get(selectorList.closeButton).click()
+    cy.get(selectorList.submitButton).eq(0).click()
+    cy.get(selectorList.saveSuccess)
+
 
   })
   it('Login Fail', () => {
